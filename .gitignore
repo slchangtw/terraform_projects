@@ -1,0 +1,9 @@
+# Local .terraform directories
+**/.terraform/*
+
+# State files
+*.tfstate
+*.tfstate.backup
+
+# Zip files
+*.zip
