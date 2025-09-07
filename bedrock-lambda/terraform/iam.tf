@@ -1,3 +1,4 @@
+
 # IAM role for Lambda execution
 data "aws_iam_policy_document" "assume_role" {
   statement {
@@ -13,6 +14,13 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name               = "lambda_execution_role_hello_world_lambda"
+  name               = "lambda_execution_role"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+
+
+resource "aws_iam_role_policy_attachment" "lambda_execution_role_policy_bedrock" {
+  role       = aws_iam_role.lambda_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
 }

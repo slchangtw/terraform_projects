@@ -40,9 +40,9 @@ resource "aws_lambda_function" "lambda_function" {
   handler          = "app.handler"
   source_code_hash = data.archive_file.lambda_function_archive.output_base64sha256
 
-  runtime = "python3.12"
+  runtime     = "python3.12"
   memory_size = each.value.memory_size
-  timeout = each.value.timeout
+  timeout     = each.value.timeout
 
   environment {
     variables = {
@@ -51,7 +51,6 @@ resource "aws_lambda_function" "lambda_function" {
   }
 
   tags = {
-    Environment = each.key
-    Application = "hello-world-lambda"
+    Environment = each.key 
   }
 }

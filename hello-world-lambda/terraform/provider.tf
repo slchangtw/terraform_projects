@@ -5,14 +5,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
-    archive = {
-      source  = "hashicorp/archive"
-      version = "~> 2.0"
-    }
   }
-
+  # Please update the bucket name to the one created by the bootstrap project
   backend "s3" {
-    bucket = "terraform-state-bucket-54321"
+    bucket = "terraform-state-bucket-3517e72f-9d72-c38f-b9c6-6a025a99c78b"
     key    = "lambda/terraform.tfstate"
     region = "eu-central-1"
   }
@@ -23,6 +19,7 @@ provider "aws" {
   default_tags {
     tags = {
       ManagedBy = "Terraform"
+      Project   = "hello-world-lambda"
     }
   }
 }

@@ -21,11 +21,17 @@ resource "aws_lambda_permission" "apigw_lambda" {
 # Lambda function
 resource "aws_lambda_function" "lambda" {
   filename         = data.archive_file.lambda_function_archive.output_path
-  function_name    = "is-anagram"
+  function_name    = "aws-service-advisor"
   role             = aws_iam_role.lambda_execution_role.arn
-  handler          = "app.handler"
+  handler          = "app.lambda_handler"
   source_code_hash = data.archive_file.lambda_function_archive.output_base64sha256
 
   runtime = "python3.12"
 
+  environment {
+    variables = {
+      MAX_INPUT_CHARACTERS = 1024
+      MODEL_ID = "eu.amazon.nova-lite-v1:0"
+    }
+  }
 }
