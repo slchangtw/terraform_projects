@@ -20,7 +20,7 @@ provider "aws" {
   default_tags {
     tags = {
       ManagedBy = "Terraform"
-      Project   = "lambda-apigateway"
+      Project   = "bedrock-lambda"
     }
   }
 }

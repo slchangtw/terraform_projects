@@ -1,4 +1,4 @@
-# Local .terraform directories
+g Local .terraform directories
 **/.terraform/*
 
 # State files
@@ -7,3 +7,7 @@
 
 # Zip files
 *.zip
+
+# Python file
+__pycache__/
+.venv/

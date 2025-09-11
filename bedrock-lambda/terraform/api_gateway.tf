@@ -1,10 +1,10 @@
 resource "aws_api_gateway_rest_api" "api" {
-  name        = "is-anagram"
-  description = "API Gateway for is-anagram lambda function"
+  name        = "aws-service-advisor-api"
+  description = "API Gateway for aws-service-advisor lambda function"
 }
 
 resource "aws_api_gateway_resource" "resource" {
-  path_part   = "is-anagram"
+  path_part   = "aws-service-advisor"
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
   rest_api_id = aws_api_gateway_rest_api.api.id
 }
@@ -15,7 +15,7 @@ resource "aws_api_gateway_method" "method_request" {
   http_method   = "GET"
   authorization = "NONE"
   request_parameters = {
-    "method.request.querystring.text" = true
+    "method.request.querystring.question" = true
   }
 }
 
