@@ -11,3 +11,4 @@ g Local .terraform directories
 # Python file
 __pycache__/
 .venv/
+.gradio/
