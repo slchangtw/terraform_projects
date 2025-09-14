@@ -4,7 +4,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 6.0"
-    } 
+    }
   }
 
   # Please update the bucket name to the one created by the bootstrap project

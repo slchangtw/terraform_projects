@@ -3,7 +3,7 @@ name = "bedrock-lambda"
 version = "0.1.0"
 description = "This project creates a Lambda function that uses Amazon Bedrock to answer questions related to AWS services."
 readme = "README.md"
-requires-python = ">=3.11.8"
+requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.40.24",
 ]

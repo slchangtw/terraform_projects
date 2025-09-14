@@ -2,22 +2,28 @@
 
 A Streamlit web application that provides expert answers about AWS services using Amazon Bedrock.
 
-## Features
-- The Terraform script creates a Lambda function that uses Amazon Bedrock to answer questions only related to AWS services and an API Gateway endpoint that invokes the Lambda function.
-- Once the infrastructure is deployed, you can launch a Gradio web application, which reads the API Gateway URL from the Terraform outputs.
+## Architecture
 
-## Deployment via Terraform
+<img src="../assets/bedrock-lambda/architecture.jpg" alt="Architecture Diagram">
+
+## Features
+- The Terraform configuration deploys a Lambda function (containerized as a Docker image) that uses Amazon Bedrock to provide expert answers about AWS services, along with an API Gateway endpoint for invoking the Lambda function.
+- After infrastructure deployment, you can launch a local Gradio web application that automatically retrieves the API Gateway URL from Terraform outputs and provides an interactive interface for querying the Lambda function.
+
+## Deployment
 
 ```bash
-terraform init
+terraform -chdir=terraform init
 terraform -chdir=terraform apply
 ```
 
 ## Launch the web application 
 
 ```bash
-uv run gradio run ui/gradio_app.py
+uv run gradio ui/gradio_app.py
 ```
+
+<img src="../assets/bedrock-lambda/successful_example.gif" width="400" height="500" alt="Successful Example"><img src="../assets/bedrock-lambda/irrelevant_question_example.gif" width="400" height="500" alt="irrelevant_question_example">
 
 ## Remove the infrastructure
 

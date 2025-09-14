@@ -6,9 +6,8 @@ This repository contains various Terraform projects for provisioning AWS service
 
 - Terraform
 - AWS CLI with credentials configured
-- Python 3.11.8 or higher
-- `uv` as package manager
-- Run [bootstrap](boostrap): bootstrap the infrastructure for the other projects.
+- `uv` as Python package manager, you can install the dependencies using `uv sync --all-groups`
+- Run [bootstrap](boostrap): bootstrap the infrastructure for other projects.
 
 ## Projects
 
