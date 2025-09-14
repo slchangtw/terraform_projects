@@ -1,10 +1,10 @@
 resource "aws_api_gateway_rest_api" "api" {
-  name        = "aws-service-advisor-api"
+  name        = "aws-answerer-api"
   description = "API Gateway for aws-service-advisor lambda function"
 }
 
 resource "aws_api_gateway_resource" "resource" {
-  path_part   = "aws-service-advisor"
+  path_part   = "aws-answerer"
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
   rest_api_id = aws_api_gateway_rest_api.api.id
 }

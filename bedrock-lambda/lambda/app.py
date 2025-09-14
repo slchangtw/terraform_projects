@@ -1,6 +1,5 @@
 import boto3
-
-from .libs.conversation import get_answer
+from libs.conversation import get_answer
 
 bedrock = boto3.client(service_name="bedrock-runtime", region_name="eu-central-1")
 

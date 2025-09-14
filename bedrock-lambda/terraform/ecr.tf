@@ -3,6 +3,7 @@ data "aws_ecr_authorization_token" "token" {}
 
 resource "aws_ecr_repository" "lambda_repository" {
   name = "lambda"
+  force_delete = true
 }
 
 # Build and push Docker image
@@ -20,7 +21,7 @@ resource "null_resource" "build_and_push_image" {
       echo ${data.aws_ecr_authorization_token.token.password} | docker login --username AWS --password-stdin ${data.aws_ecr_authorization_token.token.proxy_endpoint}
       
       # Build the image
-      docker build -t ${aws_ecr_repository.lambda_repository.repository_url}:bedrock-lambda ..
+      docker build --platform linux/arm64 -t ${aws_ecr_repository.lambda_repository.repository_url}:bedrock-lambda ..
       
       # Push the image
       docker push ${aws_ecr_repository.lambda_repository.repository_url}:bedrock-lambda
