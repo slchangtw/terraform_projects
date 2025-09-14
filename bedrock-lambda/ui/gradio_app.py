@@ -64,12 +64,12 @@ def create_interface():
     }
     """
 
-    with gr.Blocks(css=css, title="AWS Service Answerer") as demo:
+    with gr.Blocks(css=css, title="AWS Answerer") as demo:
         # Header
         gr.HTML("""
         <div class="main-header">
-            <h1>🔧 AWS Service Answerer</h1>
-            <p>Ask questions about AWS services and get answers powered by Amazon Bedrock.</p>
+            <h1>🔧 AWS Answerer</h1>
+            <p>Ask questions about AWS and get answers powered by Amazon Bedrock.</p>
         </div>
         """)
 
@@ -77,10 +77,10 @@ def create_interface():
             with gr.Column(scale=1):
                 # Input section
                 question_input = gr.Textbox(
-                    label="Enter your AWS service question:",
+                    label="Enter your AWS question:",
                     placeholder="e.g., What is the difference between S3 and EBS?",
                     lines=4,
-                    info="Ask any question related to AWS services",
+                    info="Ask any question related to AWS",
                 )
 
                 submit_btn = gr.Button("Get Answer", variant="primary", size="lg")
@@ -108,7 +108,7 @@ def create_interface():
         # About section
         with gr.Accordion("About", open=False):
             gr.Markdown("""
-            This application uses **Amazon Bedrock** to provide expert answers about AWS services.
+            This application uses **Amazon Bedrock** to provide expert answers about AWS.
             
             **Features:**
             - Powered by Amazon Nova Lite v1
