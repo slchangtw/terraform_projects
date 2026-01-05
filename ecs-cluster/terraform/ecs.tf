@@ -12,7 +12,6 @@ resource "aws_ecs_cluster" "main" {
   }
 }
 
-# Security Group for ECS Tasks
 resource "aws_security_group" "ecs_tasks" {
   name        = "ecs-tasks-sg"
   description = "Security group for ECS tasks"
