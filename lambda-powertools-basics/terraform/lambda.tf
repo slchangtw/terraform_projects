@@ -10,5 +10,11 @@ resource "aws_lambda_function" "lambda" {
 
   timeout = 10
 
+   environment {   
+    variables = {
+      POWERTOOLS_SERVICE_NAME      = "order-service"
+    }
+  }
+
   depends_on = [null_resource.build_and_push_image]
 }

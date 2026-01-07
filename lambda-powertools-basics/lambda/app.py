@@ -5,7 +5,7 @@ from aws_lambda_powertools.utilities.parser import ValidationError, parse
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from pydantic import BaseModel
 
-logger = Logger(service="order-service")
+logger = Logger()
 
 
 class OrderDetails(BaseModel):
