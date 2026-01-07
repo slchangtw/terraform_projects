@@ -1,11 +1,13 @@
 import json
 
-from aws_lambda_powertools import Logger
+from aws_lambda_powertools import Logger, Metrics
+from aws_lambda_powertools.metrics import MetricUnit
 from aws_lambda_powertools.utilities.parser import ValidationError, parse
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from pydantic import BaseModel
 
 logger = Logger()
+metrics = Metrics()
 
 
 class OrderDetails(BaseModel):
@@ -15,6 +17,7 @@ class OrderDetails(BaseModel):
     price: float
 
 
+@metrics.log_metrics
 def lambda_handler(event: OrderDetails, context: LambdaContext) -> dict:
     # Log the incoming event
     logger.info("Received event")
@@ -39,6 +42,8 @@ def lambda_handler(event: OrderDetails, context: LambdaContext) -> dict:
             "total_cost": total_cost,
             "status": "CONFIRMED",
         }
+
+        metrics.add_metric(name="SuccessfulOrders", value=1, unit=MetricUnit.Count)
 
         return {"statusCode": 200, "body": json.dumps(response)}
 
