@@ -4,8 +4,8 @@ This example shows how to deploy a Lambda function  that uses AWS Lambda Powerto
 
 ## Features
 
-- The Lambda function uses `aws-lambda-powertools` for structured logging and validation.
-- Validates input events using Pydantic models (`OrderDetails`).
+- Structured logging: JSON structured logging with `aws-lambda-powertools` logger utility.
+- Validation: Input event validation using Pydantic models (`OrderDetails`).
 
 ## Deployment
 
