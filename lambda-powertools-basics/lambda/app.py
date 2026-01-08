@@ -16,7 +16,6 @@ class OrderDetails(BaseModel):
 
 
 def lambda_handler(event: OrderDetails, context: LambdaContext) -> dict:
-    # Log the incoming event
     logger.info("Received event")
     try:
         event: OrderDetails = parse(model=OrderDetails, event=event)
