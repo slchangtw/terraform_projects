@@ -5,7 +5,7 @@ This example shows how to use AWS Lambda Powertools for Python to trace executio
 ## Features
 
 - Distributed Tracing: Uses `aws-lambda-powertools` Tracer utility to capture cold starts, function execution, and method calls.
-- X-Ray Integration: Visualizes the service map and traces in AWS X-Ray.
+- X-Ray Integration: Visualizes the service map and traces in AWS X-Ray.  
   <img src="../assets/lambda-powertools-tracer/tracer_example.jpg" width="400" height="200" alt="Tracer Example">
 
 ## Deployment
