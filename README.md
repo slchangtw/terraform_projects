@@ -11,7 +11,7 @@ This repository contains various Terraform projects for provisioning AWS service
 
 ## Projects
 
-- [hello-world-lambda](hello-world-lambda): A simple Lambda function that returns "Hello World" with a custom message based on the environment variable.
+- [lambda-requests-example](lambda-requests-example): A simple example of how to containerize a Lambda function and deploy it to AWS.
 - [lambda-apigateway](lambda-apigateway): An example of how to deploy a Lambda function and expose it via API Gateway.
 - [vpc-ec2-nginx](vpc-ec2-nginx): An example of how to configure an EC2 instance running Nginx in a VPC.
 - [bedrock-lambda](bedrock-lambda): A Lambda function that uses AWS Bedrock to answer questions about AWS services, with a Streamlit UI for interaction.

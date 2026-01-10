@@ -1,0 +1,9 @@
+[project]
+name = "lambda-requests-example"
+version = "0.1.0"
+description = "A Lambda function example using requests library"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32.5",
+]
