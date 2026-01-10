@@ -1,0 +1,9 @@
+[project]
+name = "lambda-powertools-basics"
+version = "0.1.0"
+description = "This project creates a Lambda function that uses AWS Lambda Powertools for Python to idempotency."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aws-lambda-powertools[parser,tracer]>=3.24.0",
+]
