@@ -2,19 +2,18 @@
 resource "aws_lambda_function" "lambda" {
   function_name = "lambda-powertools-tracer"
   role          = aws_iam_role.lambda_execution_role.arn
-  image_uri     = "${aws_ecr_repository.lambda_repository.repository_url}:latest"
+  image_uri     = "${aws_ecr_repository.lambda_repository.repository_url}:${local.docker_image_tag}"
   package_type  = "Image"
   architectures = ["arm64"]
 
-  source_code_hash = null_resource.build_and_push_image.triggers.lambda_code_hash
-
-  timeout = 10
+  timeout     = 10
+  memory_size = 128
 
   tracing_config {
     mode = "Active"
   }
 
-  environment {   
+  environment {
     variables = {
       POWERTOOLS_SERVICE_NAME      = "order-service"
       POWERTOOLS_METRICS_NAMESPACE = "order-service"
