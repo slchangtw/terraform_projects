@@ -13,13 +13,12 @@ resource "aws_lambda_permission" "apigw_lambda" {
 resource "aws_lambda_function" "lambda" {
   function_name = "aws-answerer"
   role          = aws_iam_role.lambda_execution_role.arn
-  image_uri     = "${aws_ecr_repository.lambda_repository.repository_url}:bedrock-lambda"
+  image_uri     = "${aws_ecr_repository.lambda_repository.repository_url}:${local.docker_image_tag}"
   package_type  = "Image"
   architectures = ["arm64"]
 
-  source_code_hash = null_resource.build_and_push_image.triggers.lambda_code_hash
-
-  timeout = 10
+  timeout     = 10
+  memory_size = 512
 
   environment {
     variables = {
