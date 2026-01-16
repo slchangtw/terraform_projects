@@ -4,7 +4,7 @@ from aws_lambda_powertools import Logger, Metrics, Tracer
 from aws_lambda_powertools.metrics import MetricUnit
 from aws_lambda_powertools.utilities.parser import ValidationError, parse
 from aws_lambda_powertools.utilities.typing import LambdaContext
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 logger = Logger()
 metrics = Metrics()
@@ -14,14 +14,12 @@ tracer = Tracer()
 class OrderDetails(BaseModel):
     order_id: str
     item: str
-    amount: int
-    price: float
+    amount: int = Field(gt=0)
+    price: float = Field(gt=0)
 
 
 @tracer.capture_method
 def calculate_total_cost(amount: int, price: float) -> float:
-    if amount <= 0 or price <= 0:
-        raise ValueError("Amount and price must be greater than 0")
     return amount * price
 
 
@@ -54,9 +52,6 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
 
     except ValidationError as e:
         logger.exception("Validation error", extra={"event": event})
-        return {"statusCode": 400, "body": json.dumps({"message": str(e)})}
-    except ValueError as e:
-        logger.exception("Value error", extra={"event": event})
         return {"statusCode": 400, "body": json.dumps({"message": str(e)})}
     except Exception:
         logger.exception("Internal server error")

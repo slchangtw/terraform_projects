@@ -4,7 +4,7 @@ from aws_lambda_powertools import Logger, Metrics
 from aws_lambda_powertools.metrics import MetricUnit
 from aws_lambda_powertools.utilities.parser import ValidationError, parse
 from aws_lambda_powertools.utilities.typing import LambdaContext
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 logger = Logger()
 metrics = Metrics()
@@ -13,20 +13,17 @@ metrics = Metrics()
 class OrderDetails(BaseModel):
     order_id: str
     item: str
-    amount: int
-    price: float
+    amount: int = Field(gt=0)
+    price: float = Field(gt=0)
 
 
 @metrics.log_metrics
-def lambda_handler(event: OrderDetails, context: LambdaContext) -> dict:
+def lambda_handler(event: dict, context: LambdaContext) -> dict:
     logger.info("Received event")
     try:
         event: OrderDetails = parse(model=OrderDetails, event=event)
 
         # Calculate total cost
-        if event.amount <= 0 or event.price <= 0:
-            raise ValueError("Amount and price must be greater than 0")
-
         total_cost = event.amount * event.price
 
         logger.info(
@@ -48,9 +45,6 @@ def lambda_handler(event: OrderDetails, context: LambdaContext) -> dict:
 
     except ValidationError as e:
         logger.exception("Validation error", extra={"event": event})
-        return {"statusCode": 400, "body": json.dumps({"message": str(e)})}
-    except ValueError as e:
-        logger.exception("Value error", extra={"event": event})
         return {"statusCode": 400, "body": json.dumps({"message": str(e)})}
     except Exception:
         logger.exception("Internal server error")

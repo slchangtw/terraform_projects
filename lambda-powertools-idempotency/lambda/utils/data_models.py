@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class OrderDetails(BaseModel):
     order_id: str
     item: str
-    amount: int
-    price: float
+    amount: int = Field(gt=0)
+    price: float = Field(gt=0)
 
 
 class OrderResponse(BaseModel):
