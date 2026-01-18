@@ -40,6 +40,8 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
         }
 
         metrics.add_metric(name="SuccessfulOrders", value=1, unit=MetricUnit.Count)
+        metrics.add_dimension(name="item", value=event.item)
+        metrics.add_metadata(key="request_id", value=context.aws_request_id)
 
         return {"statusCode": 200, "body": json.dumps(response)}
 
