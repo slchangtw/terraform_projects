@@ -5,8 +5,8 @@ This example shows how to use AWS Lambda Powertools for Python to create custom 
 ## Features
 
 - Custom Metrics: Uses `aws-lambda-powertools` Metrics utility to create business metrics (e.g., `SuccessfulOrders`).
-- CloudWatch Dashboard: Automatically provisions a CloudWatch Dashboard (`OrderServiceDashboard`) to visualize the metrics.
-  <img src="../assets/lambda-powertools-metrics/dashboard_example.jpg" width="400" height="200" alt="Dashboard Example">
+- CloudWatch Metrics: Send metrics to CloudWatch with custom dimensions (e.g., item type) and metadata.
+  <img src="../assets/lambda-powertools-metrics/dashboard_example.png" width="400" height="200" alt="Dashboard Example">
 
 ## Deployment
 
