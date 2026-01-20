@@ -33,6 +33,9 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
         # Calculate total cost
         total_cost = calculate_total_cost(amount=order.amount, price=order.price)
 
+        tracer.put_annotation(key="order_id", value=order.order_id)
+        tracer.put_metadata(key="order_details", value=order.model_dump())
+
         logger.info(
             f"Processing order {order.order_id}",
             extra={"item": order.item, "total_cost": total_cost},
@@ -47,6 +50,8 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
         }
 
         metrics.add_metric(name="SuccessfulOrders", value=1, unit=MetricUnit.Count)
+        metrics.add_dimension(name="item", value=order.item)
+        metrics.add_metadata(key="request_id", value=context.aws_request_id)
 
         return {"statusCode": 200, "body": json.dumps(response)}
 
