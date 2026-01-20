@@ -1,4 +1,3 @@
-# Lambda function
 resource "aws_lambda_function" "lambda" {
   function_name = "lambda-powertools-metrics"
   role          = aws_iam_role.lambda_execution_role.arn
