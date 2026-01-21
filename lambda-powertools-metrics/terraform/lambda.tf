@@ -17,3 +17,7 @@ resource "aws_lambda_function" "lambda" {
 
   depends_on = [null_resource.build_and_push_image]
 }
+
+resource "aws_cloudwatch_log_group" "lambda_log_group" {
+  name              = "/aws/lambda/${aws_lambda_function.lambda.function_name}"
+}
