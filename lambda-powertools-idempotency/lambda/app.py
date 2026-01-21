@@ -41,6 +41,7 @@ def calculate_total_cost(amount: int, price: float) -> float:
     output_serializer=PydanticSerializer(model=OrderResponse),
 )
 def process_order(order: OrderDetails) -> OrderResponse:
+    logger.info(f"Executing business logic for order {order.order_id}")
     total_cost = calculate_total_cost(amount=order.amount, price=order.price)
     return OrderResponse(
         order_id=order.order_id, total_cost=total_cost, status="CONFIRMED"
@@ -62,6 +63,8 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
         response = process_order(order=order)
 
         metrics.add_metric(name="SuccessfulOrders", value=1, unit=MetricUnit.Count)
+        metrics.add_dimension(name="item", value=order.item)
+        metrics.add_metadata(key="request_id", value=context.aws_request_id)
 
         return {"statusCode": 200, "body": json.dumps(response.model_dump())}
 
