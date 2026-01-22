@@ -1,0 +1,15 @@
+[project]
+name = "lambda-powertools-batch-processing"
+version = "0.1.0"
+description = "This project creates a Lambda function that uses AWS Lambda Powertools for Python for Batch Processing with SQS."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aws-lambda-powertools[parser,tracer]>=3.0.0",
+]
+
+[dependency-groups]
+test = [
+    "boto3>=1.42.32",
+    "pytest>=9.0.2",
+]
