@@ -27,11 +27,6 @@ idempotency_config = IdempotencyConfig(
 )
 
 
-@tracer.capture_method
-def calculate_total_cost(amount: int, price: float) -> float:
-    return amount * price
-
-
 # The data_keyword_argument identifies the argument name that
 # will be used for the idempotency key.
 @idempotent_function(
@@ -42,7 +37,7 @@ def calculate_total_cost(amount: int, price: float) -> float:
 )
 def process_order(order: OrderDetails) -> OrderResponse:
     logger.info(f"Executing business logic for order {order.order_id}")
-    total_cost = calculate_total_cost(amount=order.amount, price=order.price)
+    total_cost = order.amount * order.price
     return OrderResponse(
         order_id=order.order_id, total_cost=total_cost, status="CONFIRMED"
     )
